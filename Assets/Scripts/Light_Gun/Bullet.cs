@@ -19,18 +19,19 @@ public class Bullet : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        Destroy(gameObject);
-        //StartCoroutine(DestroyBullet());
+        if (other.transform.GetComponent<Target>() != null) {
+            other.transform.GetComponent<Target>().OnHit();
+        }
+        StartCoroutine(DestroyBullet());
     }
 
     private IEnumerator DestroyBullet() {
         mr.enabled = false;
         rb.useGravity = false;
         rb.velocity = Vector3.zero;
-
-        yield return new WaitForSeconds(1);
-
         Destroy(gameObject);
+
+        yield return null;
     }
 
     private IEnumerator BulletLifeTimer() {

@@ -95,11 +95,13 @@ public class ControllerHelper : MonoBehaviour {
 	public void EnableMesh(string enabled) {
 		bool controllerConnected = OVRInput.IsControllerConnected(m_controller);
 		switch (enabled) {
+			case "Enabled":
 			case "enabled":
 				m_modelOculusTouchQuest2LeftController.SetActive(controllerConnected && (m_controller == OVRInput.Controller.LTouch));
 				m_modelOculusTouchQuest2RightController.SetActive(controllerConnected && (m_controller == OVRInput.Controller.RTouch));
 				break;
 			case "Disabled":
+			case "disabled":
 				m_modelOculusTouchQuest2LeftController.SetActive(false);
 				m_modelOculusTouchQuest2RightController.SetActive(false);
 				break;

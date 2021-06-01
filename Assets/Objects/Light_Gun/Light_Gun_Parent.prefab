@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4880312995723876}
   - component: {fileID: 54273249117074256}
   - component: {fileID: 65120915716031182}
+  - component: {fileID: 8109400730273096792}
   m_Layer: 0
   m_Name: Light_Gun_Parent
   m_TagString: Untagged
@@ -62,6 +63,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.025718734, y: 0.054464404, z: 0.117198184}
   m_Center: {x: -0.0012472587, y: 0.004672778, z: -0.025110176}
+--- !u!114 &8109400730273096792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116705271511158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 285ac02960719ed4da58597c648c3ab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_allowOffhandGrab: 1
+  m_snapPosition: 1
+  m_snapOrientation: 1
+  m_snapOffset: {fileID: 0}
+  m_grabPoints:
+  - {fileID: 65120915716031182}
+  bulletPrefab: {fileID: 1077935239207538, guid: 62e36f4860ca8014fac2d6a410c1dd27, type: 3}
+  barrelEnd: {fileID: 4652567040583990}
+  bulletSpeed: 25
 --- !u!1 &1275562717166930
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,6 +125,7 @@ GameObject:
   - component: {fileID: 4572462075789094}
   - component: {fileID: 33896611911272414}
   - component: {fileID: 23724458516887520}
+  - component: {fileID: 2900300112755075047}
   m_Layer: 0
   m_Name: Light_Gun
   m_TagString: Untagged
@@ -174,3 +197,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2900300112755075047
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695923214789130}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6146490046665432620, guid: ca67c7ea38ea7d747ac9a06e73067c91, type: 3}
