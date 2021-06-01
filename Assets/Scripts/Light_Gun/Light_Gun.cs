@@ -28,7 +28,7 @@ public class Light_Gun : Usable
 
     public override void OnPickup() {
         ch = grabbedBy.gameObject.GetComponentInChildren<ControllerHelper>();
-        //print(ch.gameObject.name);
+        print("AAAAAAAAAAAAAAAAAAAA");
         ch.EnableMesh("Disabled");
     }
 

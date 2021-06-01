@@ -6,22 +6,24 @@ public class Usable : OVRGrabbable
 {
 
     protected OVRInput.Controller m_controller;
+    protected bool grabbed;
 
     private void Update() {
 
-        if (grabbedBy != null) {
+        if (grabbedBy != null && !grabbed) { 
             m_controller = grabbedBy.Controller;
+            grabbed = true;
             OnPickup();
-        } else {
+        } else  if (grabbedBy == null && grabbed){
             m_controller = OVRInput.Controller.None;
+            grabbed = false;
             OnLetGo();
         }
         if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, m_controller) > .1 && m_controller != OVRInput.Controller.None) {
             TriggerDown();
-        } else {
+        } else if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, m_controller) < .1 && m_controller != OVRInput.Controller.None) {
             TriggerUp();
         }
-        
     }
 
     virtual public void TriggerDown() { }
