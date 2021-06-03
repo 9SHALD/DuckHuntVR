@@ -39,7 +39,7 @@ public class Launcher : MonoBehaviour {
         if (launch) {
             if (!launchingDuck) {
                 if (launchedTargets.Count < maxTargets) {
-                    StartCoroutine(LaunchTimer());
+                    //StartCoroutine(LaunchTimer());
                 }
             }
         }
@@ -56,12 +56,12 @@ public class Launcher : MonoBehaviour {
         }
     }
 
-    private void LaunchDuck() {
+    public void LaunchDuck() {
         int laucherIndex = Random.Range(1, launchers.Length);
         GameObject newTarget = Instantiate(targetPrefab, launchers[laucherIndex].position, launchers[laucherIndex].rotation);
 
         Rigidbody rb = newTarget.GetComponent<Rigidbody>();
-        rb.velocity = rb.transform.forward * Random.Range(targetSpeedRange.x, targetSpeedRange.y);
+        rb.velocity = rb.transform.forward * Random.Range(targetSpeedRange.x, targetSpeedRange.y) * GameManager.difficultyModifier;
 
         Duck target = newTarget.GetComponent<Duck>();
         target.launchedBy = this;
@@ -77,5 +77,9 @@ public class Launcher : MonoBehaviour {
         LaunchDuck();
 
         launchingDuck = false;
+    }
+
+    public int DuckCheck() {
+        return launchedTargets.Count;
     }
 }

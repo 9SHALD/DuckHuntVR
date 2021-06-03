@@ -25,6 +25,7 @@ public class Duck : Target {
     }
 
     public override void OnHit() {
+        GameManager.instance.Hit();
         StartCoroutine(DestroyObject());
     }
 
