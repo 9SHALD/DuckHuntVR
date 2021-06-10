@@ -33,6 +33,7 @@ public class Duck : Target {
         launchedBy.launchedTargets.Remove(this);
         rb.velocity = Vector3.zero;
         broken = true;
+        GameManager.instance.destroyedThisLevel++;
         Destroy(gameObject);
         yield return null;
     }

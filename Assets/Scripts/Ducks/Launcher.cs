@@ -18,14 +18,10 @@ public class Launcher : MonoBehaviour {
 
     public List<Duck> launchedTargets = new List<Duck>();
 
-    private bool launch;
-    private bool launchingDuck;
-
     internal bool gotLaunchers;
 
     private void Awake() {
         GetLaunchers();
-        ToggleLaunching(true);
     }
 
     private void GetLaunchers() {
@@ -35,25 +31,13 @@ public class Launcher : MonoBehaviour {
         }
     }
 
-    private void Update() {
-        if (launch) {
-            if (!launchingDuck) {
-                if (launchedTargets.Count < maxTargets) {
-                    //StartCoroutine(LaunchTimer());
-                }
-            }
-        }
+    private void Update() { 
+
     }
 
-    public void ToggleLaunching(bool toggle) {
-        launch = toggle;
-
-        if (!toggle) {
-
-            StopAllCoroutines();
-
-            launchingDuck = false;
-        }
+    public void LaunchDucks() {
+        LaunchDuck();
+        StartCoroutine("LaunchTimer");
     }
 
     public void LaunchDuck() {
@@ -70,13 +54,11 @@ public class Launcher : MonoBehaviour {
     }
 
     private IEnumerator LaunchTimer() {
-        launchingDuck = true;
         float timer = Random.Range(duckTimerMinMax.x, duckTimerMinMax.y);
         yield return new WaitForSeconds(timer);
 
         LaunchDuck();
-
-        launchingDuck = false;
+        StopCoroutine("LaunchTimer");
     }
 
     public int DuckCheck() {
