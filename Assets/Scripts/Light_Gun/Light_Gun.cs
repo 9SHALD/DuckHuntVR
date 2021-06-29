@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Light_Gun : Usable
 {
@@ -10,6 +11,7 @@ public class Light_Gun : Usable
     private bool once = false;
     private ControllerHelper ch;
     private int shotsLeft = 3;
+    [SerializeField] TextMeshPro shotLeftText;
 
     override public void TriggerDown()
     {
@@ -19,6 +21,7 @@ public class Light_Gun : Usable
             Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
             bulletRB.velocity = bulletRB.transform.right * bulletSpeed;
             shotsLeft -= 1;
+            shotLeftText.text = shotsLeft + "/3";
         }
     }
 
@@ -40,5 +43,6 @@ public class Light_Gun : Usable
 
     public void Reload() {
         shotsLeft = 3;
+        shotLeftText.text = shotsLeft + "/3";
     }
 }

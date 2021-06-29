@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
@@ -11,7 +12,7 @@ public class GameManager : MonoBehaviour {
     private int hitThisLevel;
     public int destroyedThisLevel;
     [SerializeField] private int hitTotal;
-    [SerializeField] private int level = 25;
+    public int level = 0;
     [SerializeField] private int launchedThisLevel;
 
     [SerializeField] public static float difficultyModifier = 1;
@@ -20,9 +21,12 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField] private GameObject tempStartButton;
     [SerializeField] private GameObject tempStartButton2;
+    [SerializeField] private TextMeshPro TempLevelText;
+    [SerializeField] private TextMeshPro TempOutOFText;
 
     [SerializeField] private int[] DucksToHit;
     [SerializeField] private int[] BonusPoints;
+    private bool once;
 
     private bool gameStarted = false;
     // Start is called before the first frame update
@@ -59,13 +63,14 @@ public class GameManager : MonoBehaviour {
     
 
     private void CheckBirds() {
-        if (launcher.DuckCheck() == 0) {
+        if (launcher.DuckCheck() == 0 && !once) {
+            once = true;
             StartCoroutine("NewRound");
         }
     }
 
     [ContextMenu("Start Game")]
-    private void _Start() { StartGame(false); }
+    private void _Start() { StartGame(false); } // temp
     public void StartGame(bool multiDuck) {
         _2Ducks = multiDuck;
         IncreaseDifficulty();
@@ -82,28 +87,30 @@ public class GameManager : MonoBehaviour {
             launcher.LaunchDuck();
             launchedThisLevel++;
         }
+        once = false;
     }
 
     private void ReloadPistol() {
         gun.Reload();
     }
 
-    public void Hit() {
+    public void Hit(bool isSuperDuck = false) {
         hitThisLevel++;
         hitTotal++;
+        ScoreManager.instance.AddScore();
+        TempOutOFText.text = hitThisLevel + " / 10";
     }
 
     [ContextMenu("Increase Difficulty")]
     private void IncreaseDifficulty() {
         level++;
-        if (difficultyModifier < 2)
-            difficultyModifier *= 1.02f;
+        if (difficultyModifier < 2.5)
+            difficultyModifier *= 1.05f;
     }
 
     private IEnumerator NewRound() {
         ReloadPistol();
         yield return new WaitForSeconds(timeBetweenRounds);
-        hitThisLevel = 0;
         launchDucks(_2Ducks);
         StopCoroutine("NewRound");
     }
@@ -113,37 +120,37 @@ public class GameManager : MonoBehaviour {
         if (temp > DucksToHit.Length) {
             temp = DucksToHit.Length;
         }
-        if (hitTotal >= DucksToHit[temp]) {
+        if (hitThisLevel >= DucksToHit[temp]) {
+            if (hitThisLevel == 10) {
+                ScoreManager.instance.AddBonusPoints();
+            }
             IncreaseDifficulty();
-            hitTotal = 0;
+            hitThisLevel = 0;
             launchedThisLevel = 0;
             destroyedThisLevel = 0;
+            TempLevelText.text = "Level - " + level;
+            TempOutOFText.text = hitThisLevel + " / 10";
         } else GameOver();
     }
 
-    private void AddBonusPoints() {
-        int bonus = level - 1;
-        if (bonus > BonusPoints.Length) {
-            bonus = BonusPoints.Length;
-        }
-
-        //Add temp to points
-    }
 
     private void GameOver() {
         tempStartButton.SetActive(true);
         tempStartButton2.SetActive(true);
         SaveHighScore();
         ResetGame();
+        TempLevelText.text = "Select Mode";
+        TempOutOFText.text = " ";
     }
 
     private void SaveHighScore() {
-        //save score if highscore
+        ScoreManager.instance.SetHighScore();
     }
 
     private void ResetGame() {
         gameStarted = false;
         hitTotal = 0;
+        hitThisLevel = 0;
         launchedThisLevel = 0;
         destroyedThisLevel = 0;
         difficultyModifier = 0;

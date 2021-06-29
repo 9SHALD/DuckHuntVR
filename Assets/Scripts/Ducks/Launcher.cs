@@ -50,6 +50,9 @@ public class Launcher : MonoBehaviour {
         Duck target = newTarget.GetComponent<Duck>();
         target.launchedBy = this;
 
+        if (Random.Range(0, 100) > 90)
+            target.MakeSuperDuck();
+
         launchedTargets.Add(newTarget.GetComponent<Duck>());
     }
 

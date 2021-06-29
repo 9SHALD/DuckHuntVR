@@ -11,6 +11,7 @@ public class Duck : Target {
     internal Launcher launchedBy;
     private Rigidbody rb;
     private bool broken;
+    private bool superDuck;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
@@ -25,7 +26,11 @@ public class Duck : Target {
     }
 
     public override void OnHit() {
-        GameManager.instance.Hit();
+        if (superDuck) {
+            GameManager.instance.Hit(true);
+        } else {
+            GameManager.instance.Hit();
+        }
         StartCoroutine(DestroyObject());
     }
 
@@ -41,5 +46,9 @@ public class Duck : Target {
     public IEnumerator DuckLifeTimer() {
         yield return new WaitForSeconds(duckLifeTime);
         StartCoroutine(DestroyObject());
+    }
+
+    public void MakeSuperDuck() {
+        superDuck = true;
     }
 }
