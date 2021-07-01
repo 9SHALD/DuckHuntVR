@@ -1,0 +1,219 @@
+fileFormatVersion: 2
+guid: dddff58a7be05274ba70594e9c257991
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Bush
+    100004: Bush_2
+    100006: Bush_3
+    100008: Bush_4
+    100010: Clay disc
+    100012: Fence
+    100014: Fence_2
+    100016: Fence_3
+    100018: Fence_4
+    100020: Fence_5
+    100022: Plane
+    100024: Room.001
+    100026: Table
+    100028: zapper
+    400000: //RootNode
+    400002: Bush
+    400004: Bush_2
+    400006: Bush_3
+    400008: Bush_4
+    400010: Clay disc
+    400012: Fence
+    400014: Fence_2
+    400016: Fence_3
+    400018: Fence_4
+    400020: Fence_5
+    400022: Plane
+    400024: Room.001
+    400026: Table
+    400028: zapper
+    2100000: Trunk
+    2100002: Leaves
+    2300000: //RootNode
+    2300002: Bush
+    2300004: Bush_2
+    2300006: Bush_3
+    2300008: Bush_4
+    2300010: Clay disc
+    2300012: Fence
+    2300014: Fence_2
+    2300016: Fence_3
+    2300018: Fence_4
+    2300020: Fence_5
+    2300022: Plane
+    2300024: Room.001
+    2300026: Table
+    2300028: zapper
+    3300000: //RootNode
+    3300002: Bush
+    3300004: Bush_2
+    3300006: Bush_3
+    3300008: Bush_4
+    3300010: Clay disc
+    3300012: Fence
+    3300014: Fence_2
+    3300016: Fence_3
+    3300018: Fence_4
+    3300020: Fence_5
+    3300022: Plane
+    3300024: Room.001
+    3300026: Table
+    3300028: zapper
+    4300000: Cube.000
+    4300002: Cube.002
+    4300004: Clay disc
+    4300006: Fence
+    4300008: Bush
+    4300010: Room.001
+    4300012: Table
+    4300014: Bush_2
+    4300016: Bush_3
+    4300018: Bush_4
+    4300020: Plane
+    4300022: Fence_5
+    4300024: Fence_2
+    4300026: Fence_3
+    4300028: Fence_4
+    4300030: zapper
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bush
+    second: {fileID: 2100000, guid: 604585f65885e1847826152ca3f4119d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Clay disc
+    second: {fileID: 2100000, guid: ebbd3a5d47e3e034e96bd00c852811a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fence
+    second: {fileID: 2100000, guid: 089f3d6bb5dbfa14cba13cc300fbb108, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fence line
+    second: {fileID: 2100000, guid: ee5bea18af18c0144827c7cffc22afa4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Floor.001
+    second: {fileID: 2100000, guid: dad5bbbb715062e4494582e2f0205250, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaves
+    second: {fileID: 2100000, guid: 9a9629f44d7a54b4aae94b5190f45261, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaves Highlight
+    second: {fileID: 2100000, guid: 368f2fa7f6859e34fa5a0857886e6304, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 32e78953e8d3e17499b3dd603b2967b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Room.001
+    second: {fileID: 2100000, guid: e9abc7462addf824393488baa5285095, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Table
+    second: {fileID: 2100000, guid: ad3993e9cea0ab4449940f68abb74a76, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Trunk
+    second: {fileID: 2100000, guid: 59993390dc9bbc44ca8c7fd354b2bffb, type: 2}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

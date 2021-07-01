@@ -21,7 +21,7 @@ public class Light_Gun : Usable
             Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
             bulletRB.velocity = bulletRB.transform.right * bulletSpeed;
             shotsLeft -= 1;
-            shotLeftText.text = shotsLeft + "/3";
+            shotLeftText.text = shotsLeft.ToString();
         }
     }
 
@@ -43,6 +43,6 @@ public class Light_Gun : Usable
 
     public void Reload() {
         shotsLeft = 3;
-        shotLeftText.text = shotsLeft + "/3";
+        shotLeftText.text = shotsLeft.ToString();
     }
 }

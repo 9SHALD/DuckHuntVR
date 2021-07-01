@@ -5,7 +5,8 @@ using UnityEngine;
 public class Launcher : MonoBehaviour {
 
     [Header("References")]
-    public GameObject targetPrefab;
+    public GameObject duckPrefab;
+    public GameObject superDuckPrefab;
 
     public Transform launcherParent;
 
@@ -42,18 +43,25 @@ public class Launcher : MonoBehaviour {
 
     public void LaunchDuck() {
         int laucherIndex = Random.Range(1, launchers.Length);
-        GameObject newTarget = Instantiate(targetPrefab, launchers[laucherIndex].position, launchers[laucherIndex].rotation);
-
+        GameObject newTarget = null;
+        bool superDuck = false;
+        if (Random.Range(0, 100) < 90) {
+            newTarget = Instantiate(duckPrefab, launchers[laucherIndex].position, launchers[laucherIndex].rotation);
+        } else {
+            newTarget = Instantiate(superDuckPrefab, launchers[laucherIndex].position, launchers[laucherIndex].rotation);
+            superDuck = true;
+        }
         Rigidbody rb = newTarget.GetComponent<Rigidbody>();
+
         rb.velocity = rb.transform.forward * Random.Range(targetSpeedRange.x, targetSpeedRange.y) * GameManager.difficultyModifier;
 
         Duck target = newTarget.GetComponent<Duck>();
         target.launchedBy = this;
 
-        if (Random.Range(0, 100) > 90)
-            target.MakeSuperDuck();
-
         launchedTargets.Add(newTarget.GetComponent<Duck>());
+
+        if (superDuck)
+            target.MakeSuperDuck();
     }
 
     private IEnumerator LaunchTimer() {

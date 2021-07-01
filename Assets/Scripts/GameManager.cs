@@ -19,14 +19,16 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private float timeBetweenRounds;
     [SerializeField] private float timeBetweenLevels;
 
-    [SerializeField] private GameObject tempStartButton;
-    [SerializeField] private GameObject tempStartButton2;
-    [SerializeField] private TextMeshPro TempLevelText;
-    [SerializeField] private TextMeshPro TempOutOFText;
+    [SerializeField] private GameObject uiMenu;
+    [SerializeField] private GameObject onPlayUI;
+    [SerializeField] private TextMeshPro LevelText;
+    [SerializeField] private TextMeshPro DucksOutOFText;
 
     [SerializeField] private int[] DucksToHit;
     [SerializeField] private int[] BonusPoints;
+
     private bool once;
+    private bool firstDuckLaunched;
 
     private bool gameStarted = false;
     // Start is called before the first frame update
@@ -37,7 +39,7 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-
+    
     void Start()
     {
         if (launcher == null) {
@@ -46,8 +48,8 @@ public class GameManager : MonoBehaviour {
         if (gun == null) {
             Debug.LogError("Gun is not added to gamemanager");
         }
-        if(tempStartButton == null && tempStartButton2 == null) {
-            Debug.LogError("You can't start without a start button silly");
+        if(uiMenu == null) {
+            Debug.LogError("You can't start without the start menu silly");
         }
     }
 
@@ -69,16 +71,17 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    [ContextMenu("Start Game")]
-    private void _Start() { StartGame(false); } // temp
-    public void StartGame(bool multiDuck) {
+    public void StartGame(bool multiDuck = false) {
+        firstDuckLaunched = false;
+        onPlayUI.SetActive(true);
         _2Ducks = multiDuck;
-        IncreaseDifficulty();
+        level++;
         StartCoroutine("NewRound");
+        LevelText.text = "Level - " + level;
+        DucksOutOFText.text = "0 / 10";
         gameStarted = true;
     }
 
-    // needs multi duck support
     private void launchDucks(bool MultiDuck) {
         if (MultiDuck) {
             launcher.LaunchDucks();
@@ -97,8 +100,8 @@ public class GameManager : MonoBehaviour {
     public void Hit(bool isSuperDuck = false) {
         hitThisLevel++;
         hitTotal++;
-        ScoreManager.instance.AddScore();
-        TempOutOFText.text = hitThisLevel + " / 10";
+        ScoreManager.instance.AddScore(isSuperDuck);
+        DucksOutOFText.text = hitThisLevel + " / 10";
     }
 
     [ContextMenu("Increase Difficulty")]
@@ -110,8 +113,13 @@ public class GameManager : MonoBehaviour {
 
     private IEnumerator NewRound() {
         ReloadPistol();
+        if(firstDuckLaunched)
+            DogManager.instance.LaunchDog();
         yield return new WaitForSeconds(timeBetweenRounds);
-        launchDucks(_2Ducks);
+        if (gameStarted) {
+            firstDuckLaunched = true;
+            launchDucks(_2Ducks);
+        }
         StopCoroutine("NewRound");
     }
 
@@ -128,19 +136,20 @@ public class GameManager : MonoBehaviour {
             hitThisLevel = 0;
             launchedThisLevel = 0;
             destroyedThisLevel = 0;
-            TempLevelText.text = "Level - " + level;
-            TempOutOFText.text = hitThisLevel + " / 10";
+            LevelText.text = "Level - " + level;
+            DucksOutOFText.text = hitThisLevel + " / 10";
         } else GameOver();
     }
 
 
-    private void GameOver() {
-        tempStartButton.SetActive(true);
-        tempStartButton2.SetActive(true);
+    public void GameOver() {
+
+        uiMenu.SetActive(true);
+        onPlayUI.SetActive(false);
         SaveHighScore();
         ResetGame();
-        TempLevelText.text = "Select Mode";
-        TempOutOFText.text = " ";
+        LevelText.text = " ";
+        DucksOutOFText.text = " ";
     }
 
     private void SaveHighScore() {
@@ -153,7 +162,8 @@ public class GameManager : MonoBehaviour {
         hitThisLevel = 0;
         launchedThisLevel = 0;
         destroyedThisLevel = 0;
-        difficultyModifier = 0;
+        difficultyModifier = 1;
         level = 0;
+        ScoreManager.instance.ClearOldScore();
     }
 }
