@@ -31,6 +31,7 @@ public class Duck : Target {
         } else {
             GameManager.instance.Hit();
         }
+        EffectManager.Instance.PlayDuckDeath(transform.position, transform.rotation);
         StartCoroutine(DestroyObject());
     }
 

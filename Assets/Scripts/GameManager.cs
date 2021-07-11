@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private int[] DucksToHit;
     [SerializeField] private int[] BonusPoints;
 
+    [SerializeField] AudioClip gameOverClip;
+    [SerializeField] AudioClip hitClip;
+
     private bool once;
     private bool firstDuckLaunched;
 
@@ -77,16 +80,18 @@ public class GameManager : MonoBehaviour {
         _2Ducks = multiDuck;
         level++;
         StartCoroutine("NewRound");
-        LevelText.text = "Level - " + level;
+        LevelText.text = "Level " + level;
         DucksOutOFText.text = "0 / 10";
         gameStarted = true;
     }
 
     private void launchDucks(bool MultiDuck) {
         if (MultiDuck) {
+            launcher.SetDucksToLaunchInt(2);
             launcher.LaunchDucks();
             launchedThisLevel += 2;
         } else {
+            launcher.SetDucksToLaunchInt(1);
             launcher.LaunchDuck();
             launchedThisLevel++;
         }
@@ -98,6 +103,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void Hit(bool isSuperDuck = false) {
+        SoundManager.Instance.Play(hitClip, .5f);
         hitThisLevel++;
         hitTotal++;
         ScoreManager.instance.AddScore(isSuperDuck);
@@ -136,14 +142,14 @@ public class GameManager : MonoBehaviour {
             hitThisLevel = 0;
             launchedThisLevel = 0;
             destroyedThisLevel = 0;
-            LevelText.text = "Level - " + level;
+            LevelText.text = "Level " + level;
             DucksOutOFText.text = hitThisLevel + " / 10";
         } else GameOver();
     }
 
 
     public void GameOver() {
-
+        SoundManager.Instance.Play(gameOverClip, 0.5f);
         uiMenu.SetActive(true);
         onPlayUI.SetActive(false);
         SaveHighScore();

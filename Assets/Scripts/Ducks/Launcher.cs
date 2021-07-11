@@ -21,6 +21,8 @@ public class Launcher : MonoBehaviour {
 
     internal bool gotLaunchers;
 
+    private int ducksToLaunch;
+
     private void Awake() {
         GetLaunchers();
     }
@@ -59,7 +61,7 @@ public class Launcher : MonoBehaviour {
         target.launchedBy = this;
 
         launchedTargets.Add(newTarget.GetComponent<Duck>());
-
+        ducksToLaunch -= 1;
         if (superDuck)
             target.MakeSuperDuck();
     }
@@ -73,6 +75,12 @@ public class Launcher : MonoBehaviour {
     }
 
     public int DuckCheck() {
-        return launchedTargets.Count;
+        if (ducksToLaunch == 0)
+            return launchedTargets.Count;
+        else return 1;
+    }
+
+    public void SetDucksToLaunchInt(int ducks) {
+        ducksToLaunch = ducks;
     }
 }

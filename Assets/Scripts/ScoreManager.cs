@@ -9,12 +9,16 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
     [SerializeField] private int[] Points;
     [SerializeField] private int[] BonusPoints;
+
     [SerializeField] private float score;
     [SerializeField] private float topScore;
+
     [SerializeField] private TextMeshPro ScoreText;
     [SerializeField] private TextMeshPro ScoreTextGameOver;
     [SerializeField] private TextMeshPro TopScoreText;
     [SerializeField] private TextMeshPro TopScoreTextGameOver;
+
+    [SerializeField] private AudioClip newTopScore;
 
 
     private void Awake() {
@@ -50,6 +54,7 @@ public class ScoreManager : MonoBehaviour
     public void SetHighScore() {
         if (score > topScore) {
             topScore = score;
+            SoundManager.Instance.Play(newTopScore, 0.5f);
             TopScoreText.text = "Top Score \n" + topScore.ToString();
             TopScoreTextGameOver.text = "Top Score \n" + topScore.ToString();
         }
